@@ -1,6 +1,5 @@
 package exercise;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +38,6 @@ class App {
                     .append(" ").append(wordsCount.getValue()).append("\n");
         }
         result.append("}");
-        
         return result.toString();
     }
 }
