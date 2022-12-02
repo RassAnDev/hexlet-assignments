@@ -7,7 +7,8 @@ import java.util.Map.Entry;
 
 // BEGIN
 class App {
-    public static List<Map<String, String>> findWhere(List<Map<String, String>> books, Map<String, String> searchParams) {
+    public static List<Map<String, String>> findWhere(List<Map<String, String>> books,
+                                                      Map<String, String> searchParams) {
         List<Map<String, String>> result = new ArrayList<>();
 
         for (Map<String, String> book : books) {
