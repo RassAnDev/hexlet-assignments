@@ -30,16 +30,20 @@ class FileKVTest {
 
     // BEGIN
     @Test
-    public void testSaveStorage() {
+    void fileKVTest() {
         KeyValueStorage storage = new FileKV("src/test/resources/file", Map.of("key", "value"));
-        assertThat(FileKV.saveStorage(storage.toMap())).isEqualTo("{\"key\":\"value\"}");
-    }
+        assertThat(storage.get("key2", "default")).isEqualTo("default");
+        assertThat(storage.get("key", "default")).isEqualTo("value");
 
-    @Test
-    public void testGetStorage() {
-        KeyValueStorage storage = new FileKV("src/test/resources/file", Map.of("key", "value"));
-        String content = FileKV.saveStorage(storage.toMap());
-        assertThat(FileKV.getStorage(content)).isEqualTo(Map.of("key", "value"));
+        storage.set("key3", "value3");
+        storage.set("key", "10");
+        assertThat(storage.get("key3", "default")).isEqualTo("value3");
+        assertThat(storage.get("key", "default")).isEqualTo("10");
+
+        storage.unset("key");
+        assertThat(storage.get("key", "def")).isEqualTo("def");
+
+        assertThat(storage.toMap()).isEqualTo(Map.of("key3", "value3"));
     }
     // END
 }
