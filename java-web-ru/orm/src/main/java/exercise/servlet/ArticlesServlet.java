@@ -87,10 +87,10 @@ public class ArticlesServlet extends HttpServlet {
         // BEGIN
         PagedList<Article> pagedArticles = new QArticle()
                 .setFirstRow(offset)
-                        .setMaxRows(articlesPerPage)
-                                .orderBy()
-                                        .id.asc()
-                        .findPagedList();
+                .setMaxRows(articlesPerPage)
+                .orderBy()
+                .id.asc()
+                .findPagedList();
 
         List<Article> articles = pagedArticles.getList();
         request.setAttribute("articles", articles);
@@ -108,7 +108,7 @@ public class ArticlesServlet extends HttpServlet {
         // BEGIN
         Article article = new QArticle()
                 .id.equalTo(id)
-                        .findOne();
+                .findOne();
 
         request.setAttribute("article", article);
         // END
@@ -139,7 +139,7 @@ public class ArticlesServlet extends HttpServlet {
         // BEGIN
         Category category = new QCategory()
                 .id.equalTo(Integer.parseInt(categoryId))
-                        .findOne();
+                .findOne();
 
         Article article = new Article(title, body, category);
         article.save();
