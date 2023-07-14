@@ -52,7 +52,6 @@ public final class App {
         app.routes(() -> {
             path("articles", () -> {
                 get(ArticleController.listArticles);
-                get("{id}", ArticleController.showArticle);
                 get("new", ArticleController.newArticle);
                 post(ArticleController.createArticle);
                 get("{id}/edit", ArticleController.editArticle);
@@ -60,6 +59,7 @@ public final class App {
                 get("{id}/delete", ArticleController.deleteArticle);
                 post("{id}/delete", ArticleController.destroyArticle);
             });
+            app.get("articles/{id}", ArticleController.showArticle);
         });
         // END
     }
