@@ -15,8 +15,8 @@ import java.util.List;
 
 
 // Зависимости для самостоятельной работы
- import org.springframework.data.querydsl.binding.QuerydslPredicate;
- import com.querydsl.core.types.Predicate;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
+import com.querydsl.core.types.Predicate;
 
 @RestController
 @RequestMapping("/users")
@@ -26,32 +26,32 @@ public class UsersController {
     private final UserRepository userRepository;
 
     // BEGIN
-//    @GetMapping("")
-//    public Iterable<User> getFilteredUsers(
-//            @RequestParam(value = "firstName", required = false) String firstName,
-//            @RequestParam(value = "lastName", required = false) String lastName
-//    ) {
-//        List<Specification> specifications = new ArrayList<>();
-//        if (firstName != null) {
-//            specifications.add(new UserSpecification(new SearchCriteria<String>("firstName", firstName)));
-//        }
-//        if (lastName != null) {
-//            specifications.add(new UserSpecification(new SearchCriteria<String>("lastName", lastName)));
-//        }
-//
-//        Specification<User> result = specifications.stream()
-//                .reduce(null, (specificationResult, specification) -> {
-//                    if (specificationResult == null) {
-//                        return specification;
-//                    }
-//                    return specificationResult.and(specification);
-//                });
-//
-//        if (!specifications.isEmpty()) {
-//            return this.userRepository.findAll(result);
-//        }
-//        return this.userRepository.findAll();
-//    }
+    @GetMapping("")
+    public Iterable<User> getFilteredUsers(
+            @RequestParam(value = "firstName", required = false) String firstName,
+            @RequestParam(value = "lastName", required = false) String lastName
+    ) {
+        List<Specification> specifications = new ArrayList<>();
+        if (firstName != null) {
+            specifications.add(new UserSpecification(new SearchCriteria<String>("firstName", firstName)));
+        }
+        if (lastName != null) {
+            specifications.add(new UserSpecification(new SearchCriteria<String>("lastName", lastName)));
+        }
+
+        Specification<User> result = specifications.stream()
+                .reduce(null, (specificationResult, specification) -> {
+                    if (specificationResult == null) {
+                        return specification;
+                    }
+                    return specificationResult.and(specification);
+                });
+
+        if (!specifications.isEmpty()) {
+            return this.userRepository.findAll(result);
+        }
+        return this.userRepository.findAll();
+    }
 
 //    @GetMapping("")
 //    public Iterable<User> getFilteredUsers(
@@ -75,10 +75,10 @@ public class UsersController {
 //                .and(QUser.user.lastName.containsIgnoreCase(lastName)));
 //    }
 
-    @GetMapping("")
-    public Iterable<User> getFilteredUsers(@QuerydslPredicate(root = User.class) Predicate predicate) {
-        return this.userRepository.findAll(predicate);
-    }
+//    @GetMapping("")
+//    public Iterable<User> getFilteredUsers(@QuerydslPredicate(root = User.class) Predicate predicate) {
+//        return this.userRepository.findAll(predicate);
+//    }
     // END
 }
 

@@ -118,8 +118,8 @@ public class AppTest {
     @Test
     void testFilterByAllData() throws Exception {
         MockHttpServletResponse response = mockMvc
-                .perform(get("/users?firstName=Retha&lastName=Astupenas&email=rastupenas0@mysql.com" +
-                        "&gender=Female&profession=Electrical Engineer"))
+                .perform(get("/users?firstName=Retha&lastName=Astupenas&email=rastupenas0@mysql.com"
+                        + "&gender=Female&profession=Electrical Engineer"))
                 .andReturn()
                 .getResponse();
 
@@ -139,6 +139,5 @@ public class AppTest {
         assertThat(actualUser.getProfession()).isEqualTo("Electrical Engineer");
         assertThat(actualUser.getGender()).isEqualTo("Female");
     }
-    
     // END
 }
