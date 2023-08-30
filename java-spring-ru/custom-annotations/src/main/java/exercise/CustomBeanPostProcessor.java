@@ -36,16 +36,16 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
             return Proxy.newProxyInstance(bean.getClass().getClassLoader(),
                    bean.getClass().getInterfaces(),
                    (proxy, method, args) -> {
-               if (method.getName().equals("sum")) {
-                   LOGGER.info("Was called method: " + method.getName() + "()"+ " with arguments: "
-                           + Arrays.toString(args));
-                   return method.invoke(bean, args);
-               } else if (method.getName().equals("mult")) {
-                   LOGGER.info("Was called method: " + method.getName() + "()" + " with arguments: "
-                           + Arrays.toString(args));
-                   return method.invoke(bean, args);
-               }
-                       return proxy;
+                if (method.getName().equals("sum")) {
+                    LOGGER.info("Was called method: " + method.getName() + "()" + " with arguments: "
+                            + Arrays.toString(args));
+                    return method.invoke(bean, args);
+                } else if (method.getName().equals("mult")) {
+                    LOGGER.info("Was called method: " + method.getName() + "()" + " with arguments: "
+                            + Arrays.toString(args));
+                    return method.invoke(bean, args);
+                }
+                return proxy;
             });
         }
         return bean;
