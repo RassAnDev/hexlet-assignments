@@ -47,16 +47,42 @@ class App {
         });
     }
 
+//    public static CompletableFuture<Long> getDirectorySize(String path) {
+//        Path normalizedPath = Paths.get(path).toAbsolutePath().normalize();
+//        return CompletableFuture.supplyAsync(() -> {
+//            try {
+//                return Files.walk(normalizedPath).count();
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//        }).exceptionally(ex -> {
+//            System.out.println(ex.getMessage());
+//            return null;
+//        });
+
     public static CompletableFuture<Long> getDirectorySize(String path) {
-        Path normalizedPath = Paths.get(path).toAbsolutePath().normalize();
+
         return CompletableFuture.supplyAsync(() -> {
+            Path normalizedPath = Paths.get(path).toAbsolutePath().normalize();
+            Long size;
             try {
-                return Files.walk(normalizedPath).count();
+                size = Files.walk(normalizedPath, 1)
+                        .filter(Files::isRegularFile)
+                        .mapToLong(p -> {
+                            try {
+                                return Files.size(p);
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        })
+                        .sum();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+            return size;
+
         }).exceptionally(ex -> {
-            System.out.println(ex.getMessage());
+            System.out.println("Oops! We have an exception - " + ex.getMessage());
             return null;
         });
     }

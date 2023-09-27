@@ -46,13 +46,22 @@ class AppTest {
     }
 
     // BEGIN
+//    @Test
+//    void testGetDirectorySize() throws Exception {
+//        String path = "src/main/resources";
+//
+//        CompletableFuture<Long> result = App.getDirectorySize(path);
+//
+//        assertThat(result.get()).isEqualTo(4L);
+//    }
+
     @Test
-    void testGetDirectorySize() throws Exception {
-        String path = "src/main/resources";
+    void testGetSize() throws Exception {
+        CompletableFuture<Long> result = App.getDirectorySize(
+                "src/test/resources/dir/"
+        );
 
-        CompletableFuture<Long> result = App.getDirectorySize(path);
-
-        assertThat(result.get()).isEqualTo(4L);
+        assertThat(result.get()).isEqualTo(26);
     }
     // END
 }
